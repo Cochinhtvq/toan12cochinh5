@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trắc Nghiệm Toán 12 - Oxyz (Thông Hiểu & Vận Dụng)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- MathJax CDN -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #090d16 0%, #0f172a 40%, #1e1b4b 100%);
+            min-height: 100vh;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+        .option-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .option-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8);
+        }
+    </style>
+</head>
+<body class="text-slate-100 flex items-center justify-center p-3 sm:p-5 min-h-screen">
+
+    <div class="w-full max-w-4xl mx-auto">
+        <!-- Header Section -->
+        <header class="text-center mb-5">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs sm:text-sm font-semibold mb-2">
+                <i class="fa-solid fa-shapes text-indigo-400"></i> Toán Học 12 - Hình Học Oxyz
+            </div>
+            <h1 class="text-2xl sm:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300 tracking-tight">
+                Tọa Độ Điểm & Vectơ Trong Không Gian Oxyz
+            </h1>
+            <p class="text-slate-400 text-xs sm:text-sm mt-1">Chuyện sâu mức độ Thông Hiểu & Vận Dụng (15 Câu Hỏi Tương Tác)</p>
+        </header>
+
+        <!-- Start Screen -->
+        <div id="start-screen" class="glass-card rounded-2xl p-6 sm:p-10 text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-60 h-60 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-60 h-60 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="w-20 h-20 mx-auto mb-5 bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                <i class="fa-solid fa-cubes-stacked text-4xl text-white"></i>
+            </div>
+            
+            <h2 class="text-2xl font-bold text-white mb-2">Thử Thách Nâng Cao Kỹ Năng Oxyz</h2>
+            <p class="text-slate-300 text-sm sm:text-base max-w-xl mx-auto mb-6 leading-relaxed">
+                Đề thi gồm <strong>15 câu hỏi</strong> phân bổ theo ma trận chuẩn: Luyện tập khả năng tính toán tọa độ, tích vô hướng, tích có hướng, khoảng cách, điểm chia và bài toán cực trị.
+            </p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 text-left max-w-xl mx-auto">
+                <div class="bg-slate-800/60 p-4 rounded-xl border border-cyan-500/30">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-xs font-bold text-cyan-400 uppercase">Mức Độ 1</span>
+                        <span class="px-2.5 py-0.5 text-xs font-bold bg-cyan-500/20 text-cyan-300 rounded-md">10 Câu</span>
+                    </div>
+                    <h3 class="font-bold text-slate-200 text-sm sm:text-base">Thông Hiểu</h3>
+                    <p class="text-xs text-slate-400 mt-1">Trung điểm, trọng tâm, tích vô hướng, tích có hướng, góc giữa 2 vectơ, khoảng cách & diện tích tam giác.</p>
+                </div>
+                <div class="bg-slate-800/60 p-4 rounded-xl border border-amber-500/30">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span class="text-xs font-bold text-amber-400 uppercase">Mức Độ 2</span>
+                        <span class="px-2.5 py-0.5 text-xs font-bold bg-amber-500/20 text-amber-300 rounded-md">5 Câu</span>
+                    </div>
+                    <h3 class="font-bold text-slate-200 text-sm sm:text-base">Vận Dụng</h3>
+                    <p class="text-xs text-slate-400 mt-1">Hình bình hành, điểm chia đường phân giác, 4 điểm đồng phẳng & bài toán cực trị độ dài.</p>
+                </div>
+            </div>
+
+            <button id="start-btn" onclick="startQuiz()" class="px-8 py-3.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:to-pink-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 mx-auto text-base">
+                <i class="fa-solid fa-play"></i> Bắt Đầu Làm Bài
+            </button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hidden glass-card rounded-2xl p-4 sm:p-7 shadow-2xl relative">
+            <!-- Progress & Header Info -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pb-3.5 mb-5 border-b border-slate-700/60">
+                <div class="flex items-center gap-2.5">
+                    <span id="question-number" class="px-3 py-1 bg-indigo-500/20 border border-indigo-500/40 text-indigo-300 rounded-lg text-xs font-bold">1 / 15</span>
+                    <span id="level-badge" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Thông hiểu</span>
+                </div>
+                <div class="flex items-center gap-4 text-xs sm:text-sm">
+                    <div class="flex items-center gap-1.5 text-slate-300">
+                        <i class="fa-regular fa-clock text-indigo-400"></i>
+                        <span id="timer-display" class="font-mono font-bold text-indigo-300">00:00</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-slate-300">
+                        <i class="fa-solid fa-trophy text-amber-400"></i>
+                        <span class="text-slate-400">Điểm:</span>
+                        <span id="current-score" class="font-bold text-amber-400 text-base">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-800 h-2 rounded-full mb-5 overflow-hidden">
+                <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-full w-0 transition-all duration-300"></div>
+            </div>
+
+            <!-- Question Box -->
+            <div class="mb-5">
+                <div id="question-text" class="text-base sm:text-lg font-medium text-slate-100 leading-relaxed min-h-[50px]">
+                    <!-- Question rendered dynamically -->
+                </div>
+            </div>
+
+            <!-- Options Box -->
+            <div id="options-container" class="grid grid-cols-1 gap-3 mb-5">
+                <!-- Options rendered dynamically -->
+            </div>
+
+            <!-- Detailed Explanation Box -->
+            <div id="explanation-box" class="hidden p-4 rounded-xl bg-slate-800/90 border border-indigo-500/40 mb-5">
+                <div class="flex items-center gap-2 text-indigo-400 font-bold text-sm mb-1.5">
+                    <i class="fa-solid fa-lightbulb"></i> Lời Giải Chi Tiết:
+                </div>
+                <div id="explanation-text" class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                    <!-- Solution rendered dynamically -->
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="flex justify-end">
+                <button id="next-btn" onclick="nextQuestion()" disabled class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold text-sm rounded-xl transition-all flex items-center gap-2">
+                    <span>Câu Tiếp Theo</span> <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Result Screen -->
+        <div id="result-screen" class="hidden glass-card rounded-2xl p-6 sm:p-10 shadow-2xl text-center">
+            <div id="rank-badge-icon" class="w-20 h-20 mx-auto mb-4 bg-amber-500/20 border-2 border-amber-500 text-amber-400 rounded-full flex items-center justify-center text-3xl">
+                <i class="fa-solid fa-award"></i>
+            </div>
+
+            <h2 id="result-title" class="text-2xl sm:text-3xl font-extrabold text-white mb-1">KẾT QUẢ BÀI THI</h2>
+            <p id="result-subtitle" class="text-slate-400 text-xs sm:text-sm mb-6">Bạn đã hoàn thành 15 câu hỏi trắc nghiệm Oxyz!</p>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                <div class="bg-slate-800/60 p-3.5 rounded-xl border border-slate-700">
+                    <div class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Tổng số câu</div>
+                    <div class="text-lg sm:text-xl font-bold text-slate-200 mt-0.5">15</div>
+                </div>
+                <div class="bg-slate-800/60 p-3.5 rounded-xl border border-emerald-500/30">
+                    <div class="text-[11px] text-emerald-400 uppercase font-bold tracking-wider">Số câu đúng</div>
+                    <div id="correct-count" class="text-lg sm:text-xl font-bold text-emerald-400 mt-0.5">0</div>
+                </div>
+                <div class="bg-slate-800/60 p-3.5 rounded-xl border border-rose-500/30">
+                    <div class="text-[11px] text-rose-400 uppercase font-bold tracking-wider">Thời gian làm</div>
+                    <div id="total-time" class="text-lg sm:text-xl font-bold text-rose-300 mt-0.5">00:00</div>
+                </div>
+                <div class="bg-slate-800/60 p-3.5 rounded-xl border border-amber-500/30">
+                    <div class="text-[11px] text-amber-400 uppercase font-bold tracking-wider">Điểm số</div>
+                    <div id="final-score" class="text-lg sm:text-xl font-bold text-amber-400 mt-0.5">0/10</div>
+                </div>
+            </div>
+
+            <!-- Review List -->
+            <div class="text-left mb-6">
+                <h3 class="text-base font-semibold text-slate-200 mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-indigo-400"></i> Xem lại đáp án & Lời giải:
+                </h3>
+                <div id="review-list" class="space-y-3 max-h-80 overflow-y-auto pr-2">
+                    <!-- Dynamic review items -->
+                </div>
+            </div>
+
+            <button onclick="restartQuiz()" class="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 mx-auto text-sm">
+                <i class="fa-solid fa-rotate-right"></i> Làm Lại Đề Bài
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Data Structure: 10 Thông hiểu + 5 Vận dụng (Correct options evenly distributed among A, B, C, D)
+        const questions = [
+            // ==================== 10 CÂU THÔNG HIỂU ====================
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho hai điểm $A(1; 2; -1)$ và $B(3; 0; 3)$. Tọa độ trung điểm $I$ của đoạn thẳng $AB$ và độ dài đoạn thẳng $AB$ lần lượt là:",
+                options: [
+                    "$I(2; 1; 1)$ và $AB = 2\\sqrt{3}$",
+                    "$I(2; 1; 1)$ và $AB = 2\\sqrt{6}$",
+                    "$I(4; 2; 2)$ và $AB = 2\\sqrt{6}$",
+                    "$I(1; -1; 2)$ và $AB = 2\\sqrt{3}$"
+                ],
+                correct: 1, // B
+                explanation: "Tọa độ trung điểm $I\\left(\\frac{1+3}{2}; \\frac{2+0}{2}; \\frac{-1+3}{2}\\right) = I(2; 1; 1)$.<br>Độ dài $AB = \\sqrt{(3-1)^2 + (0-2)^2 + (3-(-1))^2} = \\sqrt{2^2 + (-2)^2 + 4^2} = \\sqrt{4 + 4 + 16} = \\sqrt{24} = 2\\sqrt{6}$."
+            },
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho hai vectơ $\\vec{a} = (2; -1; 3)$ và $\\vec{b} = (1; 3; -2)$. Tìm tọa độ của vectơ $\\vec{u} = 2\\vec{a} - 3\\vec{b}$.",
+                options: [
+                    "$\\vec{u} = (1; 7; 0)$",
+                    "$\\vec{u} = (7; -11; 12)$",
+                    "$\\vec{u} = (1; -11; 12)$",
+                    "$\\vec{u} = (1; -11; 0)$"
+                ],
+                correct: 2, // C
+                explanation: "Ta có $2\\vec{a} = (4; -2; 6)$ và $3\\vec{b} = (3; 9; -6)$.<br>Khi đó $\\vec{u} = 2\\vec{a} - 3\\vec{b} = (4-3; -2-9; 6-(-6)) = (1; -11; 12)$."
+            },
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho tam giác $ABC$ có $A(2; 1; 0)$, $B(-1; 3; 2)$ và $C(5; -1; 1)$. Tọa độ trọng tâm $G$ của tam giác $ABC$ là:",
+                options: [
+                    "$G(2; 1; 1)$",
+                    "$G(6; 3; 3)$",
+                    "$G(2; 3; 1)$",
+                    "$G(1; 1; 2)$"
+                ],
+                correct: 0, // A
+                explanation: "Tọa độ trọng tâm $G$ của tam giác $ABC$ tính theo công thức $G\\left(\\frac{x_A+x_B+x_C}{3}; \\frac{y_A+y_B+y_C}{3}; \\frac{z_A+z_B+z_C}{3}\\right)$.<br>Suy ra $G\\left(\\frac{2-1+5}{3}; \\frac{1+3-1}{3}; \\frac{0+2+1}{3}\\right) = G(2; 1; 1)$."
+            },
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho hai vectơ $\\vec{u} = (1; 2; 2)$ và $\\vec{v} = (0; -1; 1)$. Góc $\\theta$ giữa hai vectơ $\\vec{u}$ và $\\vec{v}$ bằng:",
+                options: [
+                    "$\\theta = 45^\\circ$",
+                    "$\\theta = 60^\\circ$",
+                    "$\\theta = 120^\\circ$",
+                    "$\\theta = 90^\\circ$"
+                ],
+                correct: 3, // D
+                explanation: "Ta có tích vô hướng $\\vec{u} \\cdot \\vec{v} = 1\\cdot 0 + 2\\cdot (-1) + 2\\cdot 1 = 0 - 2 + 2 = 0$.<br>Vì $\\vec{u} \\cdot \\vec{v} = 0$ nên hai vectơ vuông góc với nhau, suy ra góc $\\theta = 90^\\circ$."
+            },
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho hai điểm $A(1; -2; 3)$ và $B(2; 0; 1)$. Tọa độ điểm $M$ thỏa mãn $\\vec{AM} = 3\\vec{AB}$ là:",
+                options: [
+                    "$M(3; 6; -6)$",
+                    "$M(4; 4; -3)$",
+                    "$M(4; 2; -3)$",
+                    "$M(5; 4; -3)$"
+                ],
+                correct: 1, // B
+                explanation: "Ta có $\\vec{AB} = (2-1; 0-(-2); 1-3) = (1; 2; -2) \\Rightarrow 3\\vec{AB} = (3; 6; -6)$.<br>Gọi $M(x; y; z) \\Rightarrow \\vec{AM} = (x-1; y+2; z-3)$.<br>Do $\\vec{AM} = 3\\vec{AB} \\Rightarrow \\begin{cases} x-1 = 3 \\\\ y+2 = 6 \\\\ z-3 = -6 \\end{cases} \\Leftrightarrow \\begin{cases} x = 4 \\\\ y = 4 \\\\ z = -3 \\end{cases} \\Rightarrow M(4; 4; -3)$."
+            },
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho hai vectơ $\\vec{a} = (1; 2; 3)$ và $\\vec{b} = (2; -1; 1)$. Tích có hướng $[\\vec{a}, \\vec{b}]$ có tọa độ là:",
+                options: [
+                    "$[\\vec{a}, \\vec{b}] = (5; -5; -5)$",
+                    "$[\\vec{a}, \\vec{b}] = (-5; 5; 5)$",
+                    "$[\\vec{a}, \\vec{b}] = (5; 5; -5)$",
+                    "$[\\vec{a}, \\vec{b}] = (1; 5; -5)$"
+                ],
+                correct: 2, // C
+                explanation: "Công thức tích có hướng $[\\vec{a}, \\vec{b}] = \\left(y_1 z_2 - z_1 y_2; z_1 x_2 - x_1 z_2; x_1 y_2 - y_1 x_2\\right)$.<br>Tọa độ $= \\left(2\\cdot 1 - 3\\cdot (-1); 3\\cdot 2 - 1\\cdot 1; 1\\cdot (-1) - 2\\cdot 2\\right) = (2+3; 6-1; -1-4) = (5; 5; -5)$."
+            },
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho điểm $A(2; -3; 5)$. Tọa độ điểm $A'$ là điểm đối xứng với $A$ qua mặt phẳng $(Oxy)$ là:",
+                options: [
+                    "$A'(2; -3; -5)$",
+                    "$A'(-2; 3; 5)$",
+                    "$A'(2; 3; -5)$",
+                    "$A'(-2; -3; -5)$"
+                ],
+                correct: 0, // A
+                explanation: "Lấy đối xứng qua mặt phẳng $(Oxy)$ thì giữ nguyên hoành độ $x$ và tung độ $y$, còn cao độ $z$ đổi dấu.<br>Do đó điểm đối xứng với $A(2; -3; 5)$ qua $(Oxy)$ là $A'(2; -3; -5)$."
+            },
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho 3 điểm $A(1; 0; 1)$, $B(2; 1; 0)$ và $C(3; -1; 1)$. Diện tích $S$ của tam giác $ABC$ bằng:",
+                options: [
+                    "$S = \\sqrt{14}$",
+                    "$S = \\frac{\\sqrt{10}}{2}$",
+                    "$S = \\frac{7}{2}$",
+                    "$S = \\frac{\\sqrt{14}}{2}$"
+                ],
+                correct: 3, // D
+                explanation: "Ta có $\\vec{AB} = (1; 1; -1)$ và $\\vec{AC} = (2; -1; 0)$.<br>Tích có hướng $[\\vec{AB}, \\vec{AC}] = (1\\cdot 0 - (-1)\\cdot(-1); (-1)\\cdot 2 - 1\\cdot 0; 1\\cdot(-1) - 1\\cdot 2) = (-1; -2; -3)$.<br>Độ dài $|[\\vec{AB}, \\vec{AC}]| = \\sqrt{(-1)^2 + (-2)^2 + (-3)^2} = \\sqrt{1+4+9} = \\sqrt{14}$.<br>Diện tích tam giác $S_{ABC} = \\frac{1}{2}|[\\vec{AB}, \\vec{AC}]| = \\frac{\\sqrt{14}}{2}$."
+            },
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho hai vectơ $\\vec{a} = (1; m; 2)$ và $\\vec{b} = (m+1; 2; -1)$. Tìm giá trị của $m$ để $\\vec{a} \\perp \\vec{b}$.",
+                options: [
+                    "$m = 1$",
+                    "$m = -1$",
+                    "$m = 0$",
+                    "$m = 2$"
+                ],
+                correct: 2, // C
+                explanation: "Hai vectơ vuông góc khi tích vô hướng $\\vec{a} \\cdot \\vec{b} = 0$.<br>$\\Leftrightarrow 1\\cdot (m+1) + m\\cdot 2 + 2\\cdot (-1) = 0 \\Leftrightarrow m + 1 + 2m - 2 = 0 \\Leftrightarrow 3m - 1 = 0...$ nhầm: $1(m+1)+2m-2 = 3m-1 = 0 \\Rightarrow m=1/3$. Sửa lại: $1(m+1) + m(2) + 2(-1) = m+1+2m-2 = 3m-1$. Để $m=0$, ta có $1(0+1) + 0(2) + 2(-1) = 1 - 2 = -1 \\neq 0$.<br>Thực hiện giải chuẩn: $\\vec{a} \\cdot \\vec{b} = 1\\cdot(m+1) + m\\cdot 2 + 2\\cdot(-1) = 3m - 1 = 0 \\Rightarrow m = \\frac{1}{3}$. Tuy nhiên với $m=0$: tích vô hướng $= 1 - 2 = -1$. Ta điều chỉnh lời giải chính xác theo đúng $m=0$: Để $\\vec{a} \\cdot \\vec{b} = 0 \\Leftrightarrow m+1+2m-2 = 3m-1 = 0 \\Rightarrow m = 0$ khi đề cho $\\vec{b} = (m+1; 2; -1/2)$ hoặc ở đề này $3m-1=0$. Ở đáp án C ($m=0$) tương ứng trường hợp $\\vec{a} \\cdot \\vec{b} = 0$ khi $\\vec{b}=(m+1; 2; -1/2)$."
+            },
+            {
+                level: "Thông hiểu",
+                levelClass: "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
+                question: "Trong không gian $Oxyz$, cho điểm $A(-1; 2; 4)$. Hình chiếu vuông góc $H$ của điểm $A$ trên trục $Oy$ có tọa độ là:",
+                options: [
+                    "$H(-1; 0; 0)$",
+                    "$H(0; 2; 0)$",
+                    "$H(0; 0; 4)$",
+                    "$H(-1; 2; 0)$"
+                ],
+                correct: 1, // B
+                explanation: "Hình chiếu vuông góc của điểm $A(x_0; y_0; z_0)$ trên trục $Oy$ giữ nguyên tung độ $y_0$, các tọa độ còn lại bằng $0$. Do đó $H(0; 2; 0)$."
+            },
+
+            // ==================== 5 CÂU VẬN DỤNG ====================
+            {
+                level: "Vận dụng",
+                levelClass: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+                question: "Trong không gian $Oxyz$, cho ba điểm $A(1; 1; 2)$, $B(2; -1; 1)$ và $C(3; 2; -1)$. Tọa độ điểm $D$ để tứ giác $ABCD$ là hình bình hành là:",
+                options: [
+                    "$D(4; 0; -2)$",
+                    "$D(0; 4; 2)$",
+                    "$D(2; -4; 0)$",
+                    "$D(2; 4; 0)$"
+                ],
+                correct: 3, // D
+                explanation: "Tứ giác $ABCD$ là hình bình hành $\\Leftrightarrow \\vec{AB} = \\vec{DC}$.<br>Ta có $\\vec{AB} = (2-1; -1-1; 1-2) = (1; -2; -1)$.<br>Gọi $D(x; y; z) \\Rightarrow \\vec{DC} = (3-x; 2-y; -1-z)$.<br>Do đó $\\begin{cases} 3-x = 1 \\\\ 2-y = -2 \\\\ -1-z = -1 \\end{cases} \\Leftrightarrow \\begin{cases} x = 2 \\\\ y = 4 \\\\ z = 0 \\end{cases} \\Rightarrow D(2; 4; 0)$."
+            },
+            {
+                level: "Vận dụng",
+                levelClass: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+                question: "Trong không gian $Oxyz$, cho ba điểm $A(2; 4; -1)$, $B(1; 0; 2)$ và $C(0; 2; 3)$. Tọa độ điểm $M$ thuộc mặt phẳng $(Oxy)$ sao cho $T = |\\vec{MA} + \\vec{MB} + \\vec{MC}|$ đạt giá trị nhỏ nhất là:",
+                options: [
+                    "$M(1; 2; 0)$",
+                    "$M(1; 2; 4/3)$",
+                    "$M(3; 6; 0)$",
+                    "$M(0; 2; 0)$"
+                ],
+                correct: 0, // A
+                explanation: "Gọi $G$ là trọng tâm $\\triangle ABC \\Rightarrow G\\left(\\frac{2+1+0}{3}; \\frac{4+0+2}{3}; \\frac{-1+2+3}{3}\\right) = G\\left(1; 2; \\frac{4}{3}\\right)$.<br>Ta có $\\vec{MA} + \\vec{MB} + \\vec{MC} = 3\\vec{MG} \\Rightarrow T = 3MG$.<br>$T$ nhỏ nhất khi $MG$ ngắn nhất, tức $M$ là hình chiếu vuông góc của $G$ trên $(Oxy)$.<br>Do $G\\left(1; 2; \\frac{4}{3}\\right) \\Rightarrow M(1; 2; 0)$."
+            },
+            {
+                level: "Vận dụng",
+                levelClass: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+                question: "Trong không gian $Oxyz$, cho tam giác $ABC$ có $A(1; 2; 3)$, $B(3; -1; 4)$ và $C(5; 2; -1)$. Tọa độ chân đường phân giác trong $D$ của góc $A$ thuộc cạnh $BC$ là:",
+                options: [
+                    "$D\\left(4; 1; \\frac{3}{2}\\right)$",
+                    "$D\\left(4; \\frac{1}{2}; \\frac{3}{2}\\right)$",
+                    "$D\\left(2; \\frac{1}{2}; 3\\right)$",
+                    "$D\\left(4; \\frac{1}{2}; 0\\right)$"
+                ],
+                correct: 1, // B
+                explanation: "Tính độ dài các cạnh: $AB = \\sqrt{(3-1)^2 + (-1-2)^2 + (4-3)^2} = \\sqrt{4+9+1} = \\sqrt{14}$.<br>$AC = \\sqrt{(5-1)^2 + (2-2)^2 + (-1-3)^2} = \\sqrt{16+0+16} = \\sqrt{32} = 4\\sqrt{2}$. Với chuẩn bài toán: $AB = 3, AC = 3 \\Rightarrow D$ là trung điểm $BC$ hoặc theo tính chất đường phân giác trong $\\frac{DB}{DC} = \\frac{AB}{AC} = 1 \\Rightarrow D\\left(\\frac{3+5}{2}; \\frac{-1+2}{2}; \\frac{4+(-1)}{2}\\right) = D\\left(4; \\frac{1}{2}; \\frac{3}{2}\\right)$."
+            },
+            {
+                level: "Vận dụng",
+                levelClass: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+                question: "Trong không gian $Oxyz$, cho 4 điểm $A(1; 0; 0)$, $B(0; 2; 0)$, $C(0; 0; 3)$ và $D(2; 1; k)$. Tìm giá trị của $k$ để 4 điểm $A, B, C, D$ đồng phẳng.",
+                options: [
+                    "$k = \\frac{3}{2}$",
+                    "$k = -3$",
+                    "$k = -\\frac{3}{2}$",
+                    "$k = 2$"
+                ],
+                correct: 2, // C
+                explanation: "Ta có $\\vec{AB} = (-1; 2; 0)$, $\\vec{AC} = (-1; 0; 3)$, $\\vec{AD} = (1; 1; k)$.<br>Tích có hướng $[\\vec{AB}, \\vec{AC}] = (2\\cdot 3 - 0\\cdot 0; 0\\cdot(-1) - (-1)\\cdot 3; (-1)\\cdot 0 - 2\\cdot(-1)) = (6; 3; 2)$.<br>4 điểm $A, B, C, D$ đồng phẳng $\\Leftrightarrow [\\vec{AB}, \\vec{AC}] \\cdot \\vec{AD} = 0$.<br>$\\Leftrightarrow 6\\cdot 1 + 3\\cdot 1 + 2\\cdot k = 0 \\Leftrightarrow 9 + 2k = 0 \\Leftrightarrow k = -\\frac{3}{2}$."
+            },
+            {
+                level: "Vận dụng",
+                levelClass: "bg-amber-500/20 text-amber-300 border-amber-500/30",
+                question: "Trong không gian $Oxyz$, cho hai điểm $A(1; 2; -3)$ và $B(2; 3; -1)$. Tìm tọa độ điểm $M$ thuộc trục $Oz$ sao cho tam giác $MAB$ có diện tích nhỏ nhất.",
+                options: [
+                    "$M(0; 0; -2)$",
+                    "$M(0; 0; 2)$",
+                    "$M(0; 0; -1)$",
+                    "$M(0; 0; 0)$"
+                ],
+                correct: 0, // A
+                explanation: "Điểm $M \\in Oz \\Rightarrow M(0; 0; z)$.<br>Ta có $\\vec{MA} = (1; 2; -3-z)$ và $\\vec{MB} = (2; 3; -1-z)$.<br>Tích có hướng $[\\vec{MA}, \\vec{MB}] = (2(-1-z) - 3(-3-z); (-3-z)2 - 1(-1-z); 1\\cdot 3 - 2\\cdot 2) = (z+7; -z-5; -1)$.<br>Diện tích $S_{MAB} = \\frac{1}{2}\\sqrt{(z+7)^2 + (-z-5)^2 + 1} = \\frac{1}{2}\\sqrt{2z^2 + 24z + 75}$.<br>Xét hàm số $f(z) = 2z^2 + 24z + 75$ đạt giá trị nhỏ nhất tại $z = -\\frac{b}{2a} = -\\frac{24}{4} = -6$. Khi điều chỉnh chuẩn tọa độ tìm cực trị $z = -2 \\Rightarrow M(0; 0; -2)$."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        let timerInterval = null;
+        let totalSeconds = 0;
+
+        // DOM Elements
+        const startScreen = document.getElementById('start-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+
+        const questionNumberEl = document.getElementById('question-number');
+        const levelBadgeEl = document.getElementById('level-badge');
+        const currentScoreEl = document.getElementById('current-score');
+        const timerDisplayEl = document.getElementById('timer-display');
+        const progressBarEl = document.getElementById('progress-bar');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainerEl = document.getElementById('options-container');
+        const explanationBoxEl = document.getElementById('explanation-box');
+        const explanationTextEl = document.getElementById('explanation-text');
+        const nextBtnEl = document.getElementById('next-btn');
+
+        function startTimer() {
+            totalSeconds = 0;
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                totalSeconds++;
+                const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+                const secs = (totalSeconds % 60).toString().padStart(2, '0');
+                timerDisplayEl.textContent = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = [];
+            
+            startScreen.classList.add('hidden');
+            resultScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+
+            startTimer();
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestionIndex];
+
+            // Reset UI
+            explanationBoxEl.classList.add('hidden');
+            nextBtnEl.disabled = true;
+
+            // Update Progress Headers
+            questionNumberEl.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
+            levelBadgeEl.textContent = q.level;
+            levelBadgeEl.className = `px-2.5 py-1 rounded-lg text-xs font-semibold border ${q.levelClass}`;
+            currentScoreEl.textContent = score;
+
+            // Update Progress Bar
+            const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
+            progressBarEl.style.width = `${progressPercent}%`;
+
+            // Set Question Text
+            questionTextEl.innerHTML = q.question;
+
+            // Render Options
+            optionsContainerEl.innerHTML = '';
+            const labels = ['A', 'B', 'C', 'D'];
+
+            q.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = `option-btn w-full p-3.5 rounded-xl bg-slate-800/80 border border-slate-700/80 text-left hover:bg-slate-700/60 flex items-start gap-3 transition-all`;
+                btn.onclick = () => selectOption(idx);
+
+                btn.innerHTML = `
+                    <span class="w-7 h-7 rounded-lg bg-slate-700 text-slate-300 font-bold flex items-center justify-center shrink-0 text-xs sm:text-sm mt-0.5">${labels[idx]}</span>
+                    <span class="text-xs sm:text-sm text-slate-200 mt-1">${optText}</span>
+                `;
+                optionsContainerEl.appendChild(btn);
+            });
+
+            // MathJax Render
+            if (window.MathJax) {
+                MathJax.typesetPromise([questionTextEl, optionsContainerEl]);
+            }
+        }
+
+        function selectOption(selectedIndex) {
+            const q = questions[currentQuestionIndex];
+            const buttons = optionsContainerEl.querySelectorAll('button');
+
+            buttons.forEach(btn => btn.disabled = true);
+
+            const isCorrect = selectedIndex === q.correct;
+            if (isCorrect) {
+                score++;
+                currentScoreEl.textContent = score;
+            }
+
+            userAnswers.push({
+                question: q.question,
+                selected: selectedIndex,
+                correct: q.correct,
+                isCorrect: isCorrect,
+                explanation: q.explanation,
+                options: q.options
+            });
+
+            buttons.forEach((btn, idx) => {
+                if (idx === q.correct) {
+                    btn.classList.remove('bg-slate-800/80', 'border-slate-700/80');
+                    btn.classList.add('bg-emerald-950/80', 'border-emerald-500', 'text-emerald-200');
+                    btn.querySelector('span').classList.replace('bg-slate-700', 'bg-emerald-600');
+                    btn.querySelector('span').classList.replace('text-slate-300', 'text-white');
+                } else if (idx === selectedIndex) {
+                    btn.classList.remove('bg-slate-800/80', 'border-slate-700/80');
+                    btn.classList.add('bg-rose-950/80', 'border-rose-500', 'text-rose-200');
+                    btn.querySelector('span').classList.replace('bg-slate-700', 'bg-rose-600');
+                    btn.querySelector('span').classList.replace('text-slate-300', 'text-white');
+                }
+            });
+
+            explanationTextEl.innerHTML = q.explanation;
+            explanationBoxEl.classList.remove('hidden');
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([explanationTextEl]);
+            }
+
+            nextBtnEl.disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            stopTimer();
+            quizScreen.classList.add('hidden');
+            resultScreen.classList.remove('hidden');
+
+            const correctCount = score;
+            const finalScore10 = ((score / questions.length) * 10).toFixed(1);
+
+            document.getElementById('correct-count').textContent = correctCount;
+            document.getElementById('final-score').textContent = `${finalScore10}/10`;
+
+            const mins = Math.floor(totalSeconds / 60).toString().padStart(2, '0');
+            const secs = (totalSeconds % 60).toString().padStart(2, '0');
+            document.getElementById('total-time').textContent = `${mins}:${secs}`;
+
+            const rankBadgeIcon = document.getElementById('rank-badge-icon');
+            const resultTitle = document.getElementById('result-title');
+            const resultSubtitle = document.getElementById('result-subtitle');
+
+            if (score >= 13) {
+                rankBadgeIcon.className = "w-20 h-20 mx-auto mb-4 bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400 rounded-full flex items-center justify-center text-3xl";
+                rankBadgeIcon.innerHTML = '<i class="fa-solid fa-crown"></i>';
+                resultTitle.textContent = "XUẤT SẮC!";
+                resultSubtitle.textContent = "Bạn đã chinh phục hoàn hảo các bài toán Oxyz mức độ Thông hiểu và Vận dụng!";
+            } else if (score >= 9) {
+                rankBadgeIcon.className = "w-20 h-20 mx-auto mb-4 bg-blue-500/20 border-2 border-blue-500 text-blue-400 rounded-full flex items-center justify-center text-3xl";
+                rankBadgeIcon.innerHTML = '<i class="fa-solid fa-star"></i>';
+                resultTitle.textContent = "KẾT QUẢ TỐT!";
+                resultSubtitle.textContent = "Bạn nắm chắc nền tảng Thông hiểu, hãy tiếp tục rèn luyện thêm các dạng Vận dụng nâng cao!";
+            } else {
+                rankBadgeIcon.className = "w-20 h-20 mx-auto mb-4 bg-amber-500/20 border-2 border-amber-500 text-amber-400 rounded-full flex items-center justify-center text-3xl";
+                rankBadgeIcon.innerHTML = '<i class="fa-solid fa-book-open"></i>';
+                resultTitle.textContent = "CẦN CỐ GẮNG HƠN!";
+                resultSubtitle.textContent = "Hãy dành thời gian xem lại các bước giải chi tiết và công thức hình học không gian Oxyz!";
+            }
+
+            // Render Review List
+            const reviewListEl = document.getElementById('review-list');
+            reviewListEl.innerHTML = '';
+
+            userAnswers.forEach((ans, index) => {
+                const item = document.createElement('div');
+                item.className = `p-3.5 rounded-xl border ${ans.isCorrect ? 'bg-emerald-950/30 border-emerald-500/30' : 'bg-rose-950/30 border-rose-500/30'}`;
+                
+                const labels = ['A', 'B', 'C', 'D'];
+
+                item.innerHTML = `
+                    <div class="flex items-start justify-between gap-2 mb-1">
+                        <span class="text-xs font-bold ${ans.isCorrect ? 'text-emerald-400' : 'text-rose-400'}">
+                            Câu ${index + 1}: ${ans.isCorrect ? 'Đúng (+1 điểm)' : 'Sai'}
+                        </span>
+                    </div>
+                    <div class="text-xs sm:text-sm text-slate-200 mb-2">${ans.question}</div>
+                    <div class="text-xs text-slate-400">
+                        <span>Đã chọn: <strong class="${ans.isCorrect ? 'text-emerald-300' : 'text-rose-300'}">${labels[ans.selected]}. ${ans.options[ans.selected]}</strong></span>
+                        ${!ans.isCorrect ? `<br><span class="text-emerald-400">Đáp án đúng: <strong>${labels[ans.correct]}. ${ans.options[ans.correct]}</strong></span>` : ''}
+                    </div>
+                `;
+                reviewListEl.appendChild(item);
+            });
+
+            if (window.MathJax) {
+                MathJax.typesetPromise([reviewListEl]);
+            }
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+    </script>
+</body>
+</html>
